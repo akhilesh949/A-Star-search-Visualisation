@@ -9,8 +9,8 @@ function removeFromArray(arr, elt) {
 
 // An educated guess of how far it is between two points
 function heuristic(a, b) {
-  var d = dist(a.i, a.j, b.i, b.j);
-  // var d = abs(a.i - b.i) + abs(a.j - b.j);
+  var d = dist(a.i, a.j, b.i, b.j);  // euclidean distance
+  // var d = abs(a.i - b.i) + abs(a.j - b.j);  // manhattan distance
   return d;
 }
 
@@ -72,7 +72,7 @@ function setup() {
 }
 
 function draw() {
-  // Am I still searching?
+
   if (openSet.length > 0) {
     // Best next option
     var winner = 0;
@@ -115,7 +115,7 @@ function draw() {
           openSet.push(neighbor);
         }
 
-        // Yes, it's a better path
+        // Yes, it's a better path. So we will relax this node by updating parameters
         if (newPath) {
           neighbor.h = heuristic(neighbor, end);
           neighbor.f = neighbor.g + neighbor.h;
@@ -123,7 +123,7 @@ function draw() {
         }
       }
     }
-    // Uh oh, no solution
+    //  no solution
   } else {
     console.log('no solution');
     noLoop();
@@ -139,13 +139,13 @@ function draw() {
     }
   }
 
+   for (var i = 0; i < openSet.length; i++) {
+    openSet[i].show(color(0, 255, 0, 50));
+  }
   for (var i = 0; i < closedSet.length; i++) {
     closedSet[i].show(color(255, 0, 0, 50));
   }
 
-  for (var i = 0; i < openSet.length; i++) {
-    openSet[i].show(color(0, 255, 0, 50));
-  }
 
   // Find the path by working backwards
   path = [];
@@ -162,7 +162,7 @@ function draw() {
 
   // Drawing path as continuous line
   noFill();
-  stroke(255, 0, 200);
+  stroke(255, 0, 200); 
   strokeWeight(w / 2);
   beginShape();
   for (var i = 0; i < path.length; i++) {
