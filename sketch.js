@@ -11,6 +11,7 @@ function removeFromArray(arr, elt) {
 function heuristic(a, b) {
   var d = dist(a.i, a.j, b.i, b.j);  // euclidean distance
   // var d = abs(a.i - b.i) + abs(a.j - b.j);  // manhattan distance
+  //var d = Math.max(abs(a.i - b.i), abs(a.j - b.j));  // Chebyshev's distance
   return d;
 }
 
