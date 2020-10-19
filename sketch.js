@@ -169,5 +169,6 @@ function draw() {
   for (var i = 0; i < path.length; i++) {
     vertex(path[i].i * w + w / 2, path[i].j * h + h / 2);
   }
+  console.log("The current path length is " + path.length);
   endShape();
 }
